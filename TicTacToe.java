@@ -35,9 +35,10 @@ public class TicTacToe extends JFrame
 	pack();
 	gameButtonHandler = new GameButtonHandler();
 	
-	setLayout(new GridLayout(4,1));
+	setLayout(new FlowLayout());
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
+	
 	
 	// Header panel is only a Centered JLabel
 	headerPanel = new JPanel();
@@ -105,7 +106,7 @@ public class TicTacToe extends JFrame
 	footerPanel.add(footerLabel);
 
 	add(footerPanel);
-	setSize(500,500);
+	setSize(400,350);
     }
     
     private class GameButtonHandler implements ActionListener
@@ -125,6 +126,7 @@ public class TicTacToe extends JFrame
 		}
 	    if (numDisabled == 25)
 		{
+		    // Thix fixed it and I can't quite figure out why.  Had to do with changing the label twice in one call.
 		    if (CheckWinner())
 			{
 			    return false;
@@ -244,7 +246,7 @@ public class TicTacToe extends JFrame
 		    gameOver = !gameOver;
 		    winnerLabel.setText("Stalemate");
 		}
-
+		
 	    if (CheckWinner())
 		{
 		    gameOver = !gameOver;
@@ -261,7 +263,7 @@ public class TicTacToe extends JFrame
 			    winnerLabel.setText("Winner: Computer!");
 			}
 		}
-	    
+
 	    if( event.getSource() == newGameButton )
 		{
 		    for( int i=0; i<25; i++)
@@ -274,12 +276,10 @@ public class TicTacToe extends JFrame
 		    if( computerRB.isSelected() )
 			{
 			    humanTurn = false;
-			    System.out.print("COMPUTER\n");
 			}
 		    else
 			{
 			    humanTurn = true;
-			    System.out.print("HUMAN\n");
 			}
 		    winnerLabel.setText("Playing Game..");
 		    gameOver = false;
